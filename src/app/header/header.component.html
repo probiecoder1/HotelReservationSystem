@@ -1,0 +1,22 @@
+<mat-toolbar>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Aqore Hotel Reservation</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button routerLink="/">
+    Home
+  </button>
+  <span class="example-spacer-half"></span>
+  <button mat-icon-button routerLink="/book-room">
+    Rooms
+  </button>
+  <span class="example-spacer-half"></span>
+  <button mat-icon-button routerLink="/gallery">
+    Gallery
+  </button>
+  <span class="example-spacer-half"></span>
+  <button mat-icon-button (click)="openOffersPopup()">Offers</button>
+  <span class="example-spacer-half"></span>
+  <button mat-stroked-button routerLink="/login" >Login</button>
+</mat-toolbar>

@@ -1,17 +1,14 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { OffersComponent } from './offers/offers.component';
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
+import { OffersComponent } from '../offers/offers.component';
 
-  styleUrls: ['./app.component.scss']
+@Component({
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
-export class AppComponent {
-  title = 'hotel-reservation-system';
-  constructor(private dialog: MatDialog) {
-    this.openOffersPopup();
-  }
+export class HeaderComponent {
+  constructor(private dialog: MatDialog) {}
 
   openOffersPopup(): void {
     const dialogRef = this.dialog.open(OffersComponent, {
@@ -22,4 +19,5 @@ export class AppComponent {
       // Handle any logic after the dialog is closed, if needed
     });
   }
+
 }

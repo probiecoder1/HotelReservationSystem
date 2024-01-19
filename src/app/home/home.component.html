@@ -1,0 +1,85 @@
+<!-- home.component.html -->
+<div>
+  <section class="photo-section">
+    <div class="slideshow-container">
+      <!-- Images dynamically fetched from the 'assets/photos' folder -->
+      <div *ngFor="let photo of photos; let i = index" [class.active]="i === activeSlide" class="mySlides fade">
+        <img [src]="photo" [alt]="'Hotel Photo ' + (i + 1)">
+      </div>
+    </div>
+  </section>
+
+  <section class="booking-section">
+    <h2>Book Your Room</h2>
+  </section>
+</div> 
+
+  <section class="select-section">
+    <mat-form-field class="example-full-width">
+      <mat-label>Choose arrival date</mat-label>
+      <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    
+    <mat-form-field color="accent">
+      <mat-label>Choose departure date</mat-label>
+      <input matInput [min]="minDate" [max]="maxDate"  [matDatepicker]="picker2">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2 color="primary"></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>People</mat-label>
+      <mat-select [(value)]="selected1">
+        <mat-option value="option1">1</mat-option>
+        <mat-option value="option2">2</mat-option>
+        <mat-option value="option3">3</mat-option>
+        <mat-option value="option3">4</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <a routerLink="/book-room" class="btn">Check Availability</a>
+  </section>
+
+  <section class="reviews-section">
+    <h2>Customer Reviews</h2>
+    <div class="reviews">
+      <mat-card *ngFor="let review of reviews" class="example-card">
+        <mat-card-header>
+          <mat-card-title>{{ review.name }}</mat-card-title>
+          <mat-card-subtitle>{{ review.subtitle }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ review.content }}</p>
+          <ng-container *ngFor="let _ of [0, 1, 2, 3, 4]; let i = index">
+            <span class="material-icons" [style.color]="i < review.rating ? 'rgb(255, 210, 48)' : 'gray'">star</span>
+          </ng-container>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+  
+  <div class="col">
+    <section class="hotel-info-section">
+      <h2>About Us</h2>
+      <div class="description">
+        <p> Your Oasis of Comfort and Luxury!
+          Nestled in the heart of a bustling city, 
+          Aqore Hotel invites you to experience a harmonious blend of modern elegance and timeless hospitality. 
+          Our prime location ensures easy access to the city's vibrant attractions, 
+          while our tranquil ambiance provides a peaceful retreat for both business and leisure travelers.</p>
+      </div>
+    </section>
+    <section class="contact-section">
+      <h2>Contact Us</h2>
+      <div class="contact-info">
+        <p><span class="material-icons">email</span> info@hotelreservationexample.com</p>
+        <p><span class='material-icons'>phone</span> +1 123-456-7890</p>
+        <p><span class='material-icons'>map</span> 123 Hotel Street, City, Country</p>
+      </div>
+    </section>
+  </div>
+  
+  

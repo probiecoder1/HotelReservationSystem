@@ -1,0 +1,25 @@
+<!-- book-room.component.html -->
+
+<div class="rooms">
+  <mat-card *ngFor="let room of rooms" class="example-card">
+    <mat-card-header>
+      <mat-card-title>{{ room.name }}</mat-card-title>
+      <mat-card-subtitle>{{ room.subtitle }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="room.photo" alt="Photo of a room">
+    <mat-card-content class="card-content">
+      <p>{{ room.description }}</p>
+      <p>Accommodates: {{ room.accommodation }} People</p>
+      <p>
+        <span class="currency">Rs.</span>
+        <span class="price">{{ room.price }}</span>
+        <span class="period">/Day</span>
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button (click)="showCustomerInfoForm()" class="btn">Book Now</button>
+    </mat-card-actions>
+  </mat-card>
+  <app-customer-info-form *ngIf="showForm" (submitForm)="onCustomerInfoSubmit($event)"></app-customer-info-form>
+  <app-invoice [invoiceData]="invoiceData"></app-invoice>
+</div>

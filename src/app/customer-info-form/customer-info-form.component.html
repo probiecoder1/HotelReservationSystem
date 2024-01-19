@@ -1,0 +1,12 @@
+<!-- customer-info-form.component.html -->
+
+<form (ngSubmit)="onSubmit()">
+    <!-- Add form fields for customer information -->
+    <label for="name">Name:</label>
+    <input type="text" id="name" [(ngModel)]="customerInfo.name" required>
+  
+    <!-- Add other form fields as needed -->
+  
+    <button type="submit">Submit</button>
+  </form>
+  

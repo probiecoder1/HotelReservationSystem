@@ -1,0 +1,6 @@
+<mat-grid-list cols="3" gutterSize="16px">
+    <mat-grid-tile *ngFor="let photo of galleryPhotos">
+      <img [src]="photo.src" [alt]="photo.alt" />
+    </mat-grid-tile>
+</mat-grid-list>
+  

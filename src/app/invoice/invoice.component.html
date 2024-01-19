@@ -1,0 +1,22 @@
+<!-- invoice.component.html -->
+
+<div class="invoice-container">
+    <h2>Invoice</h2>
+  
+    <div class="customer-info">
+      <h3>Customer Information</h3>
+      <p>Name: {{ invoiceData?.customerInfo?.name || 'N/A' }}</p>
+    </div>
+  
+    <div class="booking-details">
+      <h3>Booking Details</h3>
+      <p>Selected Rooms: {{ getSelectedRoomsNames() }}</p>
+      <!-- Add other booking details as needed -->
+    </div>
+  
+    <div class="total-cost">
+      <h3>Total Cost</h3>
+      <p>Total: {{ invoiceData?.totalCost | currency:'INR' || 'N/A' }}</p>
+    </div>
+  </div>
+  
