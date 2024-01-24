@@ -32,6 +32,7 @@ Book Room Page:
   View details of the selected rooms.
   View stored customer information and stay details.
   If not logged in, you will be redirected to the login page.
+  Once all rooms are booked, no rooms will be displayed.
 
 My rooms Page:
   View details of the rooms booked.
