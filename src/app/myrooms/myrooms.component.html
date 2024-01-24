@@ -1,0 +1,105 @@
+<!-- profile.component.html -->
+
+<div class="profile-container">
+  <div class="profile-header">
+    <h1 class="profile-name">Your Information</h1>
+    <p class="profile-bio">This Information will used in billing</p>
+  </div>
+
+  <div class="profile-details">
+    <div class="profile-info">
+      <h2>Contact Information</h2>
+      <p>Email: {{ userEmail }}</p>
+    </div>
+
+    <div class="profile-info">
+      <h2>Room</h2>
+      <ul *ngFor="let room of userRooms">
+        <li>{{ room.data.name }}</li>
+      </ul>
+    </div>
+
+    <div class="profile-info">
+      <h2>Cost</h2>
+      <ul *ngFor="let room of userRooms">
+        <li>{{ room.data.price }}/ Day</li>
+      </ul>
+    </div>
+
+    <button mat-raised-button (click)="checkout()">View Invoice</button>
+  </div>
+</div>
+
+
+
+<div *ngIf="!showInvoice" class="rooms">
+  <h2>Your rooms</h2>
+    <mat-card *ngFor="let room of userRooms" class="example-card">
+      <mat-card-header>
+        <mat-card-title>{{ room.data.name }}</mat-card-title>
+        <mat-card-subtitle>{{ room.data.subtitle }}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="room.data.photo" alt="Photo of a room">
+      <mat-card-content class="card-content">
+        <p>{{ room.data.description }}</p>
+        <p>Accommodates: {{ room.data.accommodation }} People</p>
+        <p>
+          <span class="currency">Rs.</span>
+          <span class="price">{{ room.data.price }}</span>
+          <span class="period">/Day</span>
+        </p>
+      </mat-card-content>
+      <button mat-raised-button  (click)="removeRoom(room)">Remove room</button>
+    </mat-card>
+</div>
+
+
+<div *ngIf="showInvoice" class="invoice-container">
+  <h2>Invoice</h2>
+  <div id="print-section" class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Room Name</th>
+          <th>Price/Day</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let room of userRooms; let odd = odd">
+          <tr [class.odd-row]="odd">
+            <td>{{ room.data.name }}</td>
+            <td>{{ room.data.price | currency:"NPR":"symbol"}}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+
+    <div class="line my-4"></div>
+
+    <div class="total-cost">
+      <h3>Total Cost</h3>
+      <p>Total: {{ invoiceTotal | currency:"NPR":"symbol"}}</p>
+      <p>Discount of 5% is applied for booking of 3 or more rooms</p>
+    </div>
+  </div>
+
+    <button mat-button [printStyle]="{
+      h3: {
+        'color': 'navy',
+        'font-size': '1.2em',
+        'margin-bottom': '10px'
+      },
+      td: {
+      'border': '1px solid #ddd',
+      'padding': '8px',
+      'text-align': 'left',
+      },
+      p: {
+        'border-bottom': '1px solid #ccc',
+        'padding': '5px 0'
+      },
+    }" printSectionId="print-section" ngxPrint>Print Invoice</button>
+    <button mat-button (click)="closeInvoice()">Close</button>
+  
+</div>
+  

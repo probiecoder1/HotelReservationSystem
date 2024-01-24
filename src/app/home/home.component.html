@@ -2,7 +2,6 @@
 <div>
   <section class="photo-section">
     <div class="slideshow-container">
-      <!-- Images dynamically fetched from the 'assets/photos' folder -->
       <div *ngFor="let photo of photos; let i = index" [class.active]="i === activeSlide" class="mySlides fade">
         <img [src]="photo" [alt]="'Hotel Photo ' + (i + 1)">
       </div>
@@ -11,36 +10,36 @@
 
   <section class="booking-section">
     <h2>Book Your Room</h2>
+    <h4>Select arrival and departure dates to check availability</h4>
   </section>
 </div> 
 
   <section class="select-section">
     <mat-form-field class="example-full-width">
       <mat-label>Choose arrival date</mat-label>
-      <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker">
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <input id="arrivalDateInput" [min] = "minDate" matInput [matDatepicker]="picker" #arrivalDateInput>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     
-    <mat-form-field color="accent">
+    <mat-form-field class="example-full-width">
       <mat-label>Choose departure date</mat-label>
-      <input matInput [min]="minDate" [max]="maxDate"  [matDatepicker]="picker2">
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
-      <mat-datepicker #picker2 color="primary"></mat-datepicker>
+      <input id="departureDateInput" [min] = "minDate" matInput [matDatepicker]="picker2" #departureDateInput>
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>People</mat-label>
-      <mat-select [(value)]="selected1">
-        <mat-option value="option1">1</mat-option>
-        <mat-option value="option2">2</mat-option>
-        <mat-option value="option3">3</mat-option>
-        <mat-option value="option3">4</mat-option>
+      <mat-select [(value)]="selected1" #peopleNumber>
+        <mat-option value="1">1</mat-option>
+        <mat-option value="2">2</mat-option>
+        <mat-option value="3">3</mat-option>
+        <mat-option value="4">4</mat-option>
       </mat-select>
+      <mat-hint>Default selection is for 2 people</mat-hint>
     </mat-form-field>
-    <a routerLink="/book-room" class="btn">Check Availability</a>
+    <button (click)="checkAvailability()" class="btn" [disabled]="!arrivalDateInput.value || !departureDateInput.value || !peopleNumber.value">Check Availability</button>
   </section>
 
   <section class="reviews-section">

@@ -1,0 +1,99 @@
+.rooms {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.filter-sort-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.filter-sort-container label {
+  margin-right: 10px;
+}
+
+.filter-sort-container select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.example-card {
+  width: calc(33.33% - 40px);
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.example-card:hover {
+  transform: scale(1.05);
+}
+
+mat-card-content {
+  flex-grow: 1;
+  padding: 16px;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 16px;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+p span.currency {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #333;
+}
+
+p span.price {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #7658e4;
+}
+
+p span.period {
+  font-size: 1em;
+  color: #333;
+}
+
+.rooms .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 18px;
+  color: #f1f1f1;
+  background-color: #35965d;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.rooms .btn:hover {
+  background-color: #bd4a3a;
+}
+
+@media only screen and (max-width: 1200px) {
+  .example-card {
+    width: calc(50% - 40px);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .example-card {
+    width: calc(100% - 40px);
+  }
+}

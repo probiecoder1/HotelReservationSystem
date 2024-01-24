@@ -5,6 +5,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from 'src/environments/environment';
+import { FirestoreService } from './firestore.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgxPrintModule} from 'ngx-print';
 
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -30,13 +32,22 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import {MatMenuModule} from '@angular/material/menu';
 import {MatSelectModule} from '@angular/material/select';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { OffersComponent } from './offers/offers.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
+
 import { CustomerInfoFormComponent } from './customer-info-form/customer-info-form.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
+import { AllroomsComponent } from './allrooms/allrooms.component';
+import { WarnComponent } from './warn/warn.component';
+import { LogoutComponent } from './logout/logout.component';
+import { MyroomsComponent } from './myrooms/myrooms.component';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +65,12 @@ import { LoginComponent } from './login/login.component';
     OffersComponent,
     CustomerInfoFormComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    AllroomsComponent,
+    WarnComponent,
+    LogoutComponent,
+    MyroomsComponent,
+    AdminLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -71,13 +87,16 @@ import { LoginComponent } from './login/login.component';
     MatGridListModule,
     MatFormFieldModule,
     MatInputModule,
+    MatMenuModule,
     MatButtonModule,
     MatDialogModule,
     MatToolbarModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatSliderModule,
-    MatSelectModule
+    MatSnackBarModule,
+    MatSelectModule,
+    NgxPrintModule
   ],
   providers: [],
   bootstrap: [AppComponent]

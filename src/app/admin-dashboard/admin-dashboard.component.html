@@ -1,1 +1,53 @@
-<p>admin-dashboard works!</p>
+<div *ngIf="showNotBooked">
+    <div class="top">
+    <h2>Not booked rooms</h2> <button mat-stroked-button (click)="showBooked()" class="btn">See Booked Rooms</button>
+    </div>
+    <div class="rooms">
+    <mat-card *ngFor="let room of availableRooms" class="example-card">
+      <mat-card-header>
+        <mat-card-title>{{ room.name }}</mat-card-title>
+        <mat-card-subtitle>{{ room.subtitle }}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="room.photo" alt="Photo of a room">
+      <mat-card-content class="card-content">
+        <p>{{ room.description }}</p>
+        <p>Accommodates: {{ room.accommodation }} People</p>
+        <p>
+          <span class="currency">Rs.</span>
+          <span class="price">{{ room.price }}</span>
+          <span class="period">/Day</span>
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button (click)="selectRoom(room)" class="btn">Update Room Information</button>
+      </mat-card-actions>
+    </mat-card>
+    </div>
+</div>
+
+<div *ngIf="showIsBooked">
+    <div class="top">
+    <h2>Booked rooms</h2> <button mat-stroked-button (click)="showUnBooked()" class="btn">See Not Booked Rooms</button>
+    </div>
+    <div class="rooms">
+    <mat-card *ngFor="let room of bookedRooms" class="example-card">
+      <mat-card-header>
+        <mat-card-title>{{ room.name }}</mat-card-title>
+        <mat-card-subtitle>{{ room.subtitle }}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="room.photo" alt="Photo of a room">
+      <mat-card-content class="card-content">
+        <p>{{ room.description }}</p>
+        <p>Accommodates: {{ room.accommodation }} People</p>
+        <p>
+          <span class="currency">Rs.</span>
+          <span class="price">{{ room.price }}</span>
+          <span class="period">/Day</span>
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button (click)="selectRoom(room)" class="btn">Update Room Information</button>
+      </mat-card-actions>
+    </mat-card>
+    </div>
+</div>

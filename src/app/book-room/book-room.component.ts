@@ -1,112 +1,93 @@
-import { Component } from '@angular/core';
-import { Invoice, Room } from '../invoice/invoice.model';
+// book-room.component.ts
+
+import { Component, OnInit } from '@angular/core';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
+import { FirestoreService } from '../firestore.service';
+import { SharedService } from '../shared.service';
+import { Invoice } from '../invoice/invoice.model';
 
 @Component({
   selector: 'app-book-room',
   templateUrl: './book-room.component.html',
-  styleUrls: ['./book-room.component.scss']
+  styleUrls: ['./book-room.component.scss'],
 })
-export class BookRoomComponent {
-  constructor(private router: Router) {}
-  rooms = [
-    {
-      name: 'Suite 1',
-      subtitle: 'Most Popular',
-      photo: 'assets/photos/3.jpg',
-      description: 'This suite offers you the best time you can imagine',
-      accommodation : 3,
-      price: 30000,
-    },
-    {
-      name: 'Suite 2',
-      subtitle: 'Family Pack',
-      photo: 'assets/photos/4.jpg',
-      description: 'You and your family will get only the best services here',
-      accommodation : 4,
-      price: 30000,
-    },
-    {
-      name: 'River View room',
-      subtitle: 'Nature Lover',
-      photo: 'assets/photos/2.jpg',
-      description: 'This room offers the best view of the river and you can enjoy with the calming sound of the river flowing',
-      accommodation : 3,
-      price: 10000,
-    },
-    {
-      name: 'Room 1',
-      subtitle: 'Normal',
-      photo: 'assets/photos/6.jpg',
-      description: 'This room accomodates two people',
-      accommodation : 2,
-      price: 2500,
-    },
-    {
-      name: 'Room 2',
-      subtitle: 'Normal',
-      photo: 'assets/photos/6.jpg',
-      description: 'This room accomodates three people',
-      accommodation : 3,
-      price: 4000,
-    },
-    {
-      name: 'Room 3',
-      subtitle: 'Normal',
-      photo: 'assets/photos/6.jpg',
-      description: 'This room accomodates two people',
-      accommodation : 2,
-      price: 3000,
-    },
-  ];
-  selectedRooms: Room[] = [];
-  selectedDates: string = '';
-  rates: number = 0;
+export class BookRoomComponent implements OnInit {
+  availableRooms: any[] = [];
+  selectedRoom: any;
+  selectedOptions: { arrivalDate?: Date; departureDate?: Date; people?: number } = {};
+  stay: number | undefined;
+  person = this.selectedOptions.people;
+  invoiceData: Invoice | null = null;
 
-  showForm: boolean = false;
-  invoiceData: Invoice = {
-    customerInfo: { name: '' },
-    bookingDetails: {
-      rooms: [],
-      dates: '',
-      rates: 0
-    },
-    totalCost: 0
-  };
+  constructor(
+    private authService: AuthService,
+    private firestoreService: FirestoreService,
+    private sharedService: SharedService,
+    private _snackBar: MatSnackBar,
+    private router: Router
+  ) {}
 
-  generateInvoice(customerInfo: any): void {
-    // Calculate total cost, apply discount if applicable
-    const totalCost = this.calculateTotalCost();
+  ngOnInit() {
+    this.sharedService.onAvailabilityCheck(() => {
+      this.updateAvailableRooms();
+    });
+    this.stay = this.sharedService.getStayDays();
 
-    // Prepare customer information, booking details, and create the invoice
-    this.invoiceData = {
-      customerInfo: customerInfo,
-      bookingDetails: {
-        rooms: this.selectedRooms,
-        dates: this.selectedDates,
-        rates: this.rates
-      },
-      totalCost: totalCost
-    };
-    this.router.navigate(['/invoice']);
+    this.updateAvailableRooms();
+    this.selectedOptions = this.sharedService.getSelectedOptions();
   }
 
-  private calculateTotalCost(): number {
-    let totalCost = this.rates;
-
-    if (this.selectedRooms.length >= 3) {
-      totalCost *= 0.95; // Apply 5% discount for bookings of 3 or more rooms
-    }
-
-    return totalCost;
+  private updateAvailableRooms(): void {
+    this.firestoreService.getRoomsCollection().subscribe((rooms) => {
+      // Filter rooms based on booked: false
+      this.availableRooms = rooms.filter((room) => !room.booked);
+    });
   }
 
-  showCustomerInfoForm(): void {
-    this.showForm = true;
+  openSnackBar(message: string, action: string) {
+    const config = new MatSnackBarConfig();
+    config.verticalPosition = 'top';
+    config.horizontalPosition = 'center';
+    config.duration = 3000;
+
+    this._snackBar.open(message, action, config);
   }
 
-  onCustomerInfoSubmit(customerInfo: any): void {
-    this.generateInvoice(customerInfo);
-    this.showForm = false;
+  selectRoom(room: any): void {
+    this.selectedRoom = room.name;
+    console.log('Selected Room:', this.selectedRoom);
+    this.bookRoom();
   }
+
+  bookRoom() {
+    this.authService.user$.subscribe((user) => {
+      if (!user) {
+        this.openSnackBar('User must be logged in', 'Login');
+        this.router.navigate(['/login']);
+      } else {
+        const email = user.email || '';
+        console.log('Attempting to book room:', this.selectedRoom);
+        const selectedOptions = this.sharedService.getSelectedOptions();
+        const arrivalDate: Date = selectedOptions?.arrivalDate!;
+        const departureDate: Date = selectedOptions?.departureDate!;
+        const numberOfPeople: number = selectedOptions?.people ?? 0;
+        // Use the nullish coalescing operator to provide a default value (0) when this.stay is undefined
+        const stay: number = this.stay ?? 0;
+        console.log(stay)
+        const newBookedStatus = true;
+  
+        if (arrivalDate && departureDate) {
+          console.log('All values provided.', this.selectedRoom);
+          this.firestoreService.updateRoomBookingStatus(this.selectedRoom, email, stay);
+          console.log(email);
+        } else {
+          this.openSnackBar('Please select arrival and departure dates first.', 'Close');
+        }
+      }
+    });
+  }
+  
+  
 }

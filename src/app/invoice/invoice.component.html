@@ -5,7 +5,7 @@
   
     <div class="customer-info">
       <h3>Customer Information</h3>
-      <p>Name: {{ invoiceData?.customerInfo?.name || 'N/A' }}</p>
+      <p>Name: {{ invoiceData?.customerInfo?.email || 'N/A' }}</p>
     </div>
   
     <div class="booking-details">
@@ -18,5 +18,6 @@
       <h3>Total Cost</h3>
       <p>Total: {{ invoiceData?.totalCost | currency:'INR' || 'N/A' }}</p>
     </div>
+    <button (click)="printInvoice()">Print Invoice</button>
   </div>
   

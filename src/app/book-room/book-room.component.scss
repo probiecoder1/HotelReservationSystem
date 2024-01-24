@@ -35,7 +35,6 @@ p {
   margin-bottom: 10px;
 }
 
-/* Style the price elements */
 p span.currency {
   font-size: 1.5em;
   font-weight: bold;
@@ -69,7 +68,46 @@ p span.period {
   background-color: #bd4a3a;
 }
 
-/* Responsive Styles */
+.book-room-container {
+  display: block;
+  justify-content: space-between;
+}
+
+.your-stay {
+  background-color: #f8f8f8;
+  padding: 20px;
+  border-radius: 8px;
+  top: 20px;
+  right: 20px;
+}
+
+.stay-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.stay-item {
+  flex: 1 1 calc(50% - 20px);
+  text-align: center;
+}
+
+.stay-label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.stay-value {
+  color: #333;
+}
+
+.rooms {
+  flex: 0 0 55%; 
+}
+
+
+
 @media only screen and (max-width: 1200px) {
   .example-card {
     width: calc(50% - 40px);

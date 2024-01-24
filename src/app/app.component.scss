@@ -1,0 +1,14 @@
+/* app.component.scss */
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 20px; /* Adjust as needed */
+    display: flex;
+    flex-direction: column;
+  }

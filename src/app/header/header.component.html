@@ -1,22 +1,30 @@
 <mat-toolbar>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
+  <!-- <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>more_vert</mat-icon>
   </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/adminlogin">
+      <span>Admin</span>
+    </button>
+  </mat-menu> -->
   <span>Aqore Hotel Reservation</span>
   <span class="example-spacer"></span>
-  <button mat-icon-button routerLink="/">
+  <button mat-stroked-button routerLink="/">
     Home
   </button>
   <span class="example-spacer-half"></span>
-  <button mat-icon-button routerLink="/book-room">
-    Rooms
+  <button mat-stroked-button routerLink="/allrooms">
+    All Rooms
   </button>
   <span class="example-spacer-half"></span>
-  <button mat-icon-button routerLink="/gallery">
+  <button mat-stroked-button routerLink="/gallery">
     Gallery
   </button>
   <span class="example-spacer-half"></span>
-  <button mat-icon-button (click)="openOffersPopup()">Offers</button>
+  <button mat-stroked-button (click)="openOffersPopup()">Offers</button>
   <span class="example-spacer-half"></span>
-  <button mat-stroked-button routerLink="/login" >Login</button>
+  <button mat-stroked-button *ngIf="!isLoggedIn" routerLink="/login">Login</button>
+  <button mat-stroked-button *ngIf="isLoggedIn" routerLink="/myrooms">My Rooms</button>
+  <span class="example-spacer-half"></span>
+  <button mat-stroked-button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
 </mat-toolbar>

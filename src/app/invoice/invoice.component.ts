@@ -12,7 +12,9 @@ export class InvoiceComponent {
   @ViewChild('pdfContainer') pdfContainer!: ElementRef;
 
   ngAfterViewInit(): void {
-    this.generatePDF();
+    if (this.pdfContainer) {
+      this.generatePDF();
+    }
   }
 
   generatePDF(): void {
@@ -34,5 +36,8 @@ export class InvoiceComponent {
     return this.invoiceData?.bookingDetails?.rooms
       .map(room => room.name)
       .join(', ') || '';
+  }
+  printInvoice() {
+    window.print();
   }
 }
