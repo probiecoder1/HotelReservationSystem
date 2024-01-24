@@ -1,27 +1,62 @@
-# HotelReservationSystem
+# Hotel Reservation Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.5.
+This Angular application allows users to explore available hotel rooms, check availability, and book rooms, cancel booking and view invoice.
 
-## Development server
+## Instructions
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Prerequisites
+- Node.js and npm should be installed on your machine.
 
-## Code scaffolding
+### Installation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Clone the repository
+2. Use 'npm install' command in CLI
+3. Use 'ng serve' command to run on localhost
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Usage
 
-## Running unit tests
+Home Page:
+  Explore hotel photos in the photo slideshow.
+  Use the booking section to choose arrival date, departure date, and the number of people.
+  Click the "Check Availability" button to proceed to the available rooms.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Gallery:
+  View Photos of the hotel and rooms.
 
-## Running end-to-end tests
+All Rooms Page:
+  View all available rooms.
+  Click the "Book Now" button to book a room.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Book Room Page:
+  View details of the selected rooms.
+  View stored customer information and stay details.
+  If not logged in, you will be redirected to the login page.
 
-## Further help
+My rooms Page:
+  View details of the rooms booked.
+  Remove/Cancel booking.
+  View the generated invoice.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+### Design Choices and Implementation Approach
+
+Components:
+  Created components for different pages like home page, available rooms page, book room page, my room page.
+  Separated concerns to improve maintainability.
+
+Routing:
+  Used Angular Router for navigation between pages.
+
+Authentication:
+  Integrated authentication checks before allowing users to book rooms or view invoices.
+
+Shared Service:
+  Implemented shared service to pass data between components.
+
+Styling:
+  Utilized SCSS for styling to keep styles modular and maintainable.
+
+Error Handling:
+  Implemented basic error handling for scenarios like an invalid date range, invalid email, password.
+
