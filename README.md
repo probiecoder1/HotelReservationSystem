@@ -12,6 +12,7 @@ This Angular application allows users to explore available hotel rooms, check av
 1. Clone the repository
 2. Use 'npm install' command in CLI
 3. Use 'ng serve' command to run on localhost
+4. Update the database link to your own database or local database (Optional)
 
 
 ### Usage
